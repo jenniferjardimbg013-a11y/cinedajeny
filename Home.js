@@ -21,11 +21,15 @@ export default function Home() {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#18252C' },
+        headerStyle: { backgroundColor: '#121F27', borderBottomWidth: 1, borderBottomColor: '#2F434F' },
         headerTintColor: '#F4F1DE',
-        drawerStyle: { backgroundColor: '#18252C' },
+        headerTitleStyle: { fontWeight: '800', color: '#F4F1DE' },
+        drawerStyle: { backgroundColor: '#18252C', width: 280 },
         drawerActiveTintColor: '#F2C14E',
-        drawerInactiveTintColor: '#F4F1DE'
+        drawerInactiveTintColor: '#F4F1DE',
+        drawerLabelStyle: { fontSize: 15, fontWeight: '700' },
+        drawerItemStyle: { borderRadius: 12, marginHorizontal: 8, marginVertical: 4 },
+        drawerActiveBackgroundColor: '#1F2D38'
       }}
     >
       <Drawer.Screen name="Lista de jogos" component={CatalogoStack} />

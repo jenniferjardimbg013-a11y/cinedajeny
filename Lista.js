@@ -9,7 +9,7 @@ const jogos = [
     ano: 2023,
     genero: 'Ação',
     plataforma: 'PlayStation 5',
-    imagem: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6v5f.jpg',
+    imagem: 'nota1.jpg',
     url: 'https://www.playstation.com/pt-br/games/marvels-spider-man-2/',
     sinopse: 'Peter Parker e Miles Morales protegem Nova York enquanto enfrentam novos inimigos e desafios.'
   },
@@ -20,7 +20,7 @@ const jogos = [
     ano: 2022,
     genero: 'Ação e aventura',
     plataforma: 'PlayStation 4 • 5',
-    imagem: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co5s5v.jpg',
+    imagem: 'nota2.jpg',
     url: 'https://www.playstation.com/pt-br/games/god-of-war-ragnarok/',
     sinopse: 'Kratos e Atreus viajam pelos reinos nórdicos em busca de respostas antes do Ragnarök.'
   },
@@ -31,7 +31,7 @@ const jogos = [
     ano: 2022,
     genero: 'Ação e aventura',
     plataforma: 'PlayStation 5',
-    imagem: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co5x4u.jpg',
+    imagem: 'nota3.jpg',
     url: 'https://www.playstation.com/pt-br/games/the-last-of-us-part-i/',
     sinopse: 'Joel precisa atravessar um mundo destruído para proteger Ellie em uma jornada emocionante.'
   },
@@ -42,7 +42,7 @@ const jogos = [
     ano: 2022,
     genero: 'Corrida',
     plataforma: 'PlayStation 4 • 5',
-    imagem: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co3w2d.jpg',
+    imagem: 'nota4.jpg',
     url: 'https://www.playstation.com/pt-br/games/gran-turismo-7/',
     sinopse: 'Corra em pistas famosas, personalize seus carros e viva uma experiência realista de velocidade.'
   },
@@ -53,7 +53,7 @@ const jogos = [
     ano: 2022,
     genero: 'RPG',
     plataforma: 'PlayStation 4 • 5',
-    imagem: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co4t5a.jpg',
+    imagem: 'nota5.jpg',
     url: 'https://www.playstation.com/pt-br/games/horizon-forbidden-west/',
     sinopse: 'Aloy explora terras distantes e enfrenta máquinas perigosas para salvar o futuro do planeta.'
   },
@@ -141,7 +141,7 @@ const jogos = [
     ano: 2024,
     genero: 'Aventura',
     plataforma: 'PlayStation 4 • 5',
-    imagem: 'https://placehold.co/600x900/F4A6C1/FFFFFF?text=Barbie',
+    imagem: 'ultima.jpg',
     url: 'https://www.playstation.com/pt-br/games/barbie-project-friendship/',
     sinopse: 'Ajude Barbie e suas amigas em missões criativas, encontros divertidos e muita amizade.'
   }
@@ -164,7 +164,7 @@ export default function Lista({ navigation }) {
           : Linking.openURL(item.url);
       }}
     >
-      <View style={[styles.capaJogo, { backgroundColor: item.cor }]}>
+      <View style={[styles.capaJogo, { backgroundColor: item.cor || '#1F2A32' }]}>
         <Image source={{ uri: item.imagem }} style={styles.imagemJogo} />
       </View>
       <View style={styles.listaDetalhes}>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   cabecalho: {
     paddingHorizontal: 20,
-    paddingBottom: 20
+    paddingBottom: 22
   },
   titulo: {
     color: '#F4F1DE',
@@ -223,15 +223,23 @@ const styles = StyleSheet.create({
   subtitulo: {
     color: '#A8B5B9',
     fontSize: 14,
-    marginTop: 4
+    marginTop: 6,
+    letterSpacing: 0.3
   },
   busca: {
     backgroundColor: '#1B2930',
     color: '#F4F1DE',
-    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#2E3D46',
+    borderRadius: 12,
     paddingHorizontal: 14,
-    paddingVertical: 10,
-    marginTop: 16
+    paddingVertical: 12,
+    marginTop: 18,
+    fontSize: 15,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 }
   },
   conteudoFlatList: {
     paddingHorizontal: 14,
@@ -241,43 +249,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   listaItem: {
-    backgroundColor: '#1B2930',
+    backgroundColor: '#1A2730',
     marginBottom: 14,
     padding: 9,
-    borderRadius: 14,
+    borderRadius: 18,
     width: '48%',
-    minHeight: 270,
-    elevation: 4,
+    minHeight: 280,
+    borderWidth: 1,
+    borderColor: '#2F434F',
+    elevation: 6,
     shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 3 }
+    shadowOpacity: 0.3,
+    shadowRadius: 9,
+    shadowOffset: { width: 0, height: 4 }
   },
   capaJogo: {
     width: '100%',
-    height: 160,
-    borderRadius: 10,
+    height: 170,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#3A4F5D'
   },
   imagemJogo: {
     width: '100%',
     height: '100%',
-    borderRadius: 10
-  },
-  iconeJogo: {
-    color: '#FFF8E7',
-    fontSize: 54,
-    fontWeight: '900'
-  },
-  numeroJogo: {
-    position: 'absolute',
-    top: 8,
-    right: 9,
-    color: 'rgba(255, 255, 255, 0.75)',
-    fontSize: 11,
-    fontWeight: '800'
+    borderRadius: 12
   },
   listaDetalhes: {
     width: '100%'
