@@ -28,7 +28,7 @@ export default function App() {
         <Tabs.Screen
           name="Perfil"
           component={Perfil}
-          options={{ title: 'Apresentação' }}
+          options={{ title: 'Perfil da jogadora' }}
         />
         <Tabs.Screen
           name="Configuracoes"

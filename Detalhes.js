@@ -11,29 +11,33 @@ import {
 
 
 export default function Detalhes({ route, navigation }) {
-  const { filmes } = route.params;
+  const { jogo } = route.params;
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Image source={{ uri: filmes.imagem }} style={styles.imagem} />
+        <Image
+          source={typeof jogo.imagem === 'string' ? { uri: jogo.imagem } : jogo.imagem}
+          style={styles.imagem}
+        />
 
-        <Text style={styles.titulo}>{filmes.nome}</Text>
+        <Text style={styles.kicker}>BEM-VINDA AO MUNDO DOS JOGOS</Text>
+        <Text style={styles.titulo}>{jogo.nome}</Text>
 
         <View style={styles.infoBox}>
-          <Text style={styles.informacao}>Ano: {filmes.ano}</Text>
-          <Text style={styles.informacao}>Gênero: {filmes.genero}</Text>
-          <Text style={styles.informacao}>Plataforma: {filmes.plataforma}</Text>
+          <Text style={styles.informacao}>Ano: {jogo.ano}</Text>
+          <Text style={styles.informacao}>Gênero: {jogo.genero}</Text>
+          <Text style={styles.informacao}>Plataforma: {jogo.plataforma}</Text>
         </View>
 
-        <Text style={styles.sinopse}>{filmes.sinopse}</Text>
+        <Text style={styles.sinopse}>{jogo.sinopse}</Text>
 
-        <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL(filmes.url)}>
+        <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL(jogo.url)}>
           <Text style={styles.textoBotao}>Abrir página do jogo</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botaoVoltar} onPress={() => navigation.goBack()}>
-          <Text style={styles.textoBotao}>Voltar</Text>
+          <Text style={styles.textoBotao}>Sair dos detalhes</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,6 +77,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 14
   },
+  kicker: {
+    color: '#F2C14E',
+    fontSize: 12,
+    fontWeight: '900',
+    letterSpacing: 1.5,
+    textAlign: 'center',
+    marginBottom: 7
+  },
   infoBox: {
     backgroundColor: '#121F27',
     borderRadius: 12,
@@ -96,22 +108,26 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   botao: {
-    backgroundColor: '#F2C14E',
+    backgroundColor: '#18A0FB',
     width: '100%',
     padding: 15,
     borderRadius: 12,
     alignItems: 'center',
-    marginBottom: 12
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#55BCFF'
   },
   botaoVoltar: {
-    backgroundColor: '#344954',
+    backgroundColor: '#273A52',
     width: '100%',
     padding: 15,
     borderRadius: 12,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#3F5C7D'
   },
   textoBotao: {
-    color: '#101820',
+    color: '#F4F1DE',
     fontWeight: '800',
     fontSize: 16
   }

@@ -1,9 +1,31 @@
 import { useState } from 'react';
-import { Alert, Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 
 export default function Perfil() {
   const [texto, setTexto] = useState('');
+  const [foto, setFoto] = useState(null);
+
+  const escolherFoto = async () => {
+    const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissao.granted) {
+      Alert.alert('Permissão necessária', 'Permita o acesso às suas fotos para escolher uma imagem.');
+      return;
+    }
+
+    const resultado = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1
+    });
+
+    if (!resultado.canceled) {
+      setFoto(resultado.assets[0].uri);
+    }
+  };
 
   const falar = () => {
     if (texto.trim() === '') {
@@ -21,20 +43,26 @@ export default function Perfil() {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Image source={require('./assets/icon.png')} style={styles.avatar} />
-        <Text style={styles.titulo}>Apresentação</Text>
+        <Image
+          source={foto ? { uri: foto } : require('./assets/icon.png')}
+          style={styles.avatar}
+        />
+        <TouchableOpacity style={styles.botaoFoto} onPress={escolherFoto}>
+          <Text style={styles.textoBotaoFoto}>{foto ? 'Trocar minha foto' : 'Escolher minha foto'}</Text>
+        </TouchableOpacity>
+        <Text style={styles.titulo}>Perfil da jogadora</Text>
 
-        <Text style={styles.label}>Nome completo</Text>
-        <Text style={styles.valor}>jennifer giovana lopes</Text>
+        <Text style={styles.label}>Jogadora</Text>
+        <Text style={styles.valor}>Jennifer Giovana Lopes</Text>
 
-        <Text style={styles.label}>RA</Text>
+        <Text style={styles.label}>ID da jogadora</Text>
         <Text style={styles.valor}>Informe seu RA</Text>
 
-        <Text style={styles.label}>Disciplina</Text>
+        <Text style={styles.label}>Modo de jogo</Text>
         <Text style={styles.valor}>Dispositivos Móveis</Text>
 
         <View style={styles.badge}>
-          <Text style={styles.badgeTexto}>Trabalho da disciplina de Dispositivos Móveis</Text>
+          <Text style={styles.badgeTexto}>PERFIL DA GIOVANA</Text>
         </View>
 
         <TextInput
@@ -50,8 +78,8 @@ export default function Perfil() {
         </View>
 
         <Text style={styles.texto}>
-          O PlayStation da Jeny é um catálogo de jogos com imagens, descrições,
-          links e leitura por voz para tornar a experiência mais acessível.
+          O PlayStation da Giovana é um catálogo de jogos com imagens, descrições,
+          links e leitura por voz para deixar a experiência mais acessível.
         </Text>
       </View>
     </View>
@@ -89,6 +117,21 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#F2C14E',
     backgroundColor: '#1F2D38'
+  },
+  botaoFoto: {
+    alignSelf: 'center',
+    backgroundColor: '#18A0FB',
+    borderRadius: 12,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#55BCFF'
+  },
+  textoBotaoFoto: {
+    color: '#F4F1DE',
+    fontSize: 13,
+    fontWeight: '800'
   },
   titulo: {
     color: '#F2C14E',

@@ -14,7 +14,7 @@ export default function Configuracoes() {
       </View>
       <View style={styles.item}>
         <Text style={styles.nome}>Tema</Text>
-        <Text style={styles.valor}>PlayStation da Jeny</Text>
+        <Text style={styles.valor}>PlayStation da Giovana</Text>
       </View>
     </View>
   );
